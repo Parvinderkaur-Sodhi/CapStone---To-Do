@@ -12,7 +12,7 @@ const tasks = {
 };
 
 app.get('/', (req, res) => {
-    res.render('index', { tasks });
+    res.render('index.ejs', { tasks });
 });
 
 app.post('/addTask', (req, res) => {
