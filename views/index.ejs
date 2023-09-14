@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/styles.css">
+    <title>ToDo List</title>
+</head>
+
+<body class="d-flex flex-column justify-content-center align-items-center">
+    <br>
+    <div class="container date">
+        <% 
+            const options = { 
+                weekday: 'long', 
+                year: 'numeric', 
+                month: 'long', 
+                day: 'numeric' 
+            };
+            const formattedDate = (new Date()).toLocaleDateString(undefined, options);
+        %>
+        <h2><%= formattedDate %></h2>
+    </div>
+    
+    <br><br>
+
+    <div class="container">
+        <h1>ToDo List</h1>
+
+        <div class="add-task form-group d-flex">
+            <div class="input-group">
+                <input type="text" id="task" name="task" class="form-control" placeholder="Enter your task" required>
+                <div class="input-group-append">
+                    <select id="list" name="list" class="form-control">
+                        <option value="day">Day</option>
+                        <option value="work">Work</option>
+                    </select>
+                </div>
+            </div>
+            <button type="button" id="add-task-button" class="btn btn-primary ml-2">Add</button>
+        </div>
+
+        <div class="toggle-buttons">
+            <span class="toggle-label">Show:</span>
+            <button class="toggle-button active" id="show-all" data-list="all">All</button>
+            <button class="toggle-button" id="show-day" data-list="day">Day</button>
+            <button class="toggle-button" id="show-work" data-list="work">Work</button>
+        </div>
+
+        <br>
+
+        <h2>Tasks</h2>
+        <ul id="task-list">
+            <!-- Tasks will be dynamically inserted here -->
+        </ul>
+    </div>
+
+    <script>
+        // JavaScript to handle task toggling and addition
+        const taskList = document.getElementById('task-list');
+        const showAllButton = document.getElementById('show-all');
+        const showDayButton = document.getElementById('show-day');
+        const showWorkButton = document.getElementById('show-work');
+        const addTaskButton = document.getElementById('add-task-button');
+
+        showAllButton.addEventListener('click', () => {
+            showAllButton.classList.add('active');
+            showDayButton.classList.remove('active');
+            showWorkButton.classList.remove('active');
+            filterTasks('all');
+        });
+
+        showDayButton.addEventListener('click', () => {
+            showAllButton.classList.remove('active');
+            showDayButton.classList.add('active');
+            showWorkButton.classList.remove('active');
+            filterTasks('day');
+        });
+
+        showWorkButton.addEventListener('click', () => {
+            showAllButton.classList.remove('active');
+            showDayButton.classList.remove('active');
+            showWorkButton.classList.add('active');
+            filterTasks('work');
+        });
+
+        function filterTasks(listName) {
+            const tasks = document.querySelectorAll('li');
+            tasks.forEach(task => {
+                const list = task.getAttribute('data-list');
+                if (list === listName || (listName === 'all' && list)) {
+                    task.style.display = 'flex';
+                } else {
+                    task.style.display = 'none';
+                }
+            });
+        }
+
+        addTaskButton.addEventListener('click', () => {
+            const taskInput = document.getElementById('task');
+            const listSelect = document.getElementById('list');
+            const task = taskInput.value;
+            const list = listSelect.value;
+            if (task) {
+                addTask(task, list);
+                taskInput.value = '';
+            }
+        });
+
+        function addTask(task, list) {
+            const listItem = document.createElement('li');
+            listItem.setAttribute('data-list', list);
+            listItem.innerHTML = `
+        <label class="d-flex align-items-center">
+          <span class="task-text">${task}</span>
+          <button type="button" class="btn btn-success ml-auto" onclick="toggleStrikeThrough(this)">✓</button>
+        </label>
+      `;
+            taskList.appendChild(listItem);
+        }
+
+        function toggleStrikeThrough(button) {
+            const taskText = button.parentNode.querySelector('.task-text');
+            taskText.classList.toggle('completed');
+        }
+
+        filterTasks('all'); // Default to showing all tasks
+        showAllButton.classList.add('active'); // Set "All" as the default active button
+    </script>
+</body>
+
+</html>

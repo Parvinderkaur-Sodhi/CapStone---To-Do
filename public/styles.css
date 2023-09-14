@@ -1,0 +1,97 @@
+/* public/styles.css */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f0f0f0;
+  background-image: url("./images/bg.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+.container.date {
+  background-color: #d0d0d0;
+  text-align: center; /* Center-align text horizontally */
+  display: flex;
+  justify-content: center; /* Center-align text vertically */
+  align-items: center;
+  height: 100%;
+}
+
+.container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+}
+
+h1, h2 {
+  color: #333;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+li {
+  margin: 10px 0;
+  display: flex;
+  align-items: center;
+}
+
+label {
+  flex-grow: 1;
+}
+
+.completed {
+  text-decoration: line-through;
+  color: #888;
+}
+
+.toggle-label {
+  margin-right: 10px;
+  font-weight: bold;
+  color: #555;
+}
+
+.toggle-button {
+  background-color: #d0d0d0;
+  color: #555;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.toggle-button.active {
+  background-color: #8257e5;
+  color: white;
+}
+
+.add-task {
+  display: flex;
+  align-items: center;
+}
+
+.add-task input[type="text"], select {
+  flex-grow: 1;
+  padding: 5px;
+  margin: 5px;
+}
+
+.add-task button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.add-task button:hover {
+  background-color: #0056b3;
+}
