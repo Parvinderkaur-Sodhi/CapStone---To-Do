@@ -1,9 +1,12 @@
 {
+  "homepage": "https://parvinderkaur-sodhi.github.io/CapStone_To-Do/",
   "name": "todo",
   "version": "1.0.0",
   "description": "Capstone Project To do List!",
   "main": "index.js",
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Parvinderkaur Sodhi",
@@ -12,5 +15,8 @@
     "bootstrap": "^5.3.2",
     "ejs": "^3.1.9",
     "express": "^4.18.2"
+  },
+  "devDependencies": {
+    "gh-pages": "^6.0.0"
   }
 }
